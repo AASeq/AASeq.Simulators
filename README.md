@@ -11,3 +11,9 @@ project.
 Responds to any TCP traffic by echoing the same traffic back.
 
     bin/aaseq-echo-tcp -p 1234
+
+### UDP Echo
+
+Responds to any UDP traffic by echoing the same traffic back.
+
+    bin/aaseq-echo-udp -p 1234
