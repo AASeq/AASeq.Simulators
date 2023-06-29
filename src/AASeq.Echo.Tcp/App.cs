@@ -33,35 +33,10 @@ internal static class App {
         };
         rootCommand.SetHandler(
             (ip, port) => {
-                Run(ip ?? IPAddress.Any, port);
+                Simulator.Run(ip ?? IPAddress.Any, port);
             },
             ipOption, portOption);
 
-        rootCommand.Invoke(args);
-    }
-
-
-    private static void Run(IPAddress ip, int port) {
-        while (true) {
-            try {
-                var server = new TcpListener(ip, port);
-                server.Start();
-                Out.WriteLine($"Listening on {server.LocalEndpoint}", ConsoleColor.Cyan);
-
-                while (true) {
-                    try {
-                        var tcpClient = server.AcceptTcpClient();
-                        Out.WriteLine($"Accepted connection from {tcpClient.Client.RemoteEndPoint}", ConsoleColor.DarkCyan);
-
-                        ClientThread.Run(tcpClient);
-                    } catch (SocketException ex) {
-                        Out.WriteLine($"Error: {ex.Message}", ConsoleColor.Red);
-                    }
-                }
-            } catch (SocketException ex) {
-                Out.WriteLine($"Error: {ex.Message}", ConsoleColor.Red);
-            }
-        }
 
     }
 }
