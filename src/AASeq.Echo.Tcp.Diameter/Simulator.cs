@@ -54,7 +54,6 @@ internal static class Simulator {
                             nextPacketOffset = offset + diamLength;
                         } else {
                             throw new InvalidOperationException("Unexpected Diameter version at offset {nextPacketOffset}");
-                            break;
                         }
                     }
 

@@ -45,7 +45,9 @@ internal static class Simulator {
 
     private static void SetupResponseAuthenticator(ref byte[] buffer, string secret) {
         var secretBytes = System.Text.Encoding.UTF8.GetBytes(secret);
+#pragma warning disable CA5351 // Radius protocol needs MD5
         using var md5 = MD5.Create();
+#pragma warning restore CA5351 // Do Not Use Broken Cryptographic Algorithms
         md5.TransformBlock(buffer, 0, buffer.Length, null, 0);
         md5.TransformFinalBlock(secretBytes, 0, secretBytes.Length);
         var md5Bytes = md5.Hash!;
