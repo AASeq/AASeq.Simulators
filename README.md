@@ -36,3 +36,9 @@ To install, run command below.
 To simulate radius packet check [man page](https://man.archlinux.org/man/radclient.1.en)
 
     echo "User-Name=test,User-Password=changeme" | radclient 127.0.0.1 auth secret
+
+### nc
+
+To simulate a single diameter packet, use the following line:
+
+    echo -ne '\x01\x00\x00\x14\x80\x00\x00\x01\x00\x00\x00\x02\x00\x00\x00\x04\x00\x00\x00\x04' | nc localhost 3868
