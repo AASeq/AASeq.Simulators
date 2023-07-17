@@ -34,6 +34,16 @@ release() {
             -p:PublishReadyToRun=true -p:PublishSingleFile=true -p:PublishTrimmed=true
 }
 
+docker() {
+    mkdir -p "$SCRIPT_DIR/build/docker"
+    dotnet publish --configuration Release --output "$SCRIPT_DIR/build/docker" \
+        /t:PublishContainer -p:PublishProfile=DefaultContainer --no-self-contained \
+        "$SCRIPT_DIR/src/AASeq.Echo.Tcp.Diameter/AASeq.Echo.Tcp.Diameter.csproj"
+    dotnet publish --configuration Release --output "$SCRIPT_DIR/build/docker" \
+        /t:PublishContainer -p:PublishProfile=DefaultContainer --no-self-contained \
+        "$SCRIPT_DIR/src/AASeq.Echo.Udp.Radius/AASeq.Echo.Udp.Radius.csproj"
+}
+
 
 case $ACTION in
     clean)
@@ -48,6 +58,11 @@ case $ACTION in
     release)
         if ! [ -n "$MAKELEVEL" ]; then clean; fi
         release
+        ;;
+
+    docker)
+        if ! [ -n "$MAKELEVEL" ]; then clean; fi
+        docker
         ;;
 
     *)

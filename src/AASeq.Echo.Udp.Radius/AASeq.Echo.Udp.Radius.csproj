@@ -18,6 +18,17 @@
         <EnableNETAnalyzers>true</EnableNETAnalyzers>
     </PropertyGroup>
 
+    <PropertyGroup>
+        <ContainerImageName>echo-udp-radius</ContainerImageName>
+        <ContainerImageTags>1.0.0</ContainerImageTags>
+        <ContainerBaseImage>mcr.microsoft.com/dotnet/runtime:7.0-alpine</ContainerBaseImage>
+        <ContainerRuntimeIdentifier>linux-x64</ContainerRuntimeIdentifier>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.NET.Build.Containers" Version="0.4.0" />
+    </ItemGroup>
+
     <ItemGroup>
         <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
     </ItemGroup>

@@ -8,3 +8,6 @@ build: clean
 
 release: clean
 	@./make.sh release
+
+docker: clean
+	@./make.sh docker
